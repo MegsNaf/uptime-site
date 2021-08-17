@@ -41,20 +41,6 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
-setInterval(() => {
-  var links = db.get("linkler");
-  if (!links) return;
-  var linkA = links.map(c => c.url);
-  linkA.forEach(link => {
-    try {
-      fetch(link);
-    } catch (e) {
-      // console.log("" + e);
-    }
-  });
-  let zaman = new Date();
-  console.log("Pong! Requests sent");
-}, 60000);
 
 client.on("ready", () => {
   if (!Array.isArray(db.get("linkler"))) {
